@@ -1,0 +1,7 @@
+title: Redirect Template
+author: Dynamic QR System
+version: 1.0.0
+contributes:
+  formats:
+    html:
+      template: redirect.html

@@ -1,0 +1,8 @@
+---
+title: "Redirecting to Contact..."
+slug: contact
+target_url: "https://example.com/contact-us"
+format:
+  html:
+    template: ../_extensions/redirect/redirect.html
+---

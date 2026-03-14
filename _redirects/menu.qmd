@@ -1,0 +1,8 @@
+---
+title: "Redirecting to Menu..."
+slug: menu
+target_url: "https://example.com/restaurant-menu"
+format:
+  html:
+    template: ../_extensions/redirect/redirect.html
+---

@@ -1,0 +1,8 @@
+---
+title: "Redirecting to Promotion..."
+slug: promo
+target_url: "https://example.com/special-offer"
+format:
+  html:
+    template: ../_extensions/redirect/redirect.html
+---

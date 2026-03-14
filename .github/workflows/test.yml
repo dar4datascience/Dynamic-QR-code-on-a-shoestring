@@ -1,0 +1,50 @@
+name: Test QR Code Generation
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Test QR code generation
+        run: |
+          python generate_qr_codes.py https://test.github.io/test
+          
+      - name: Verify QR codes created
+        run: |
+          if [ ! -d "qr_codes" ]; then
+            echo "Error: qr_codes directory not created"
+            exit 1
+          fi
+          
+          file_count=$(ls -1 qr_codes/*.png 2>/dev/null | wc -l)
+          if [ $file_count -eq 0 ]; then
+            echo "Error: No QR codes generated"
+            exit 1
+          fi
+          
+          echo "✓ Successfully generated $file_count QR codes"
+      
+      - name: Upload QR codes as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-qr-codes
+          path: qr_codes/
+          retention-days: 7

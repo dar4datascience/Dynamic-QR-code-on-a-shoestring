@@ -1,0 +1,18 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Dynamic QR Redirects"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+  page-footer:
+    center: "Dynamic QR Code System"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false

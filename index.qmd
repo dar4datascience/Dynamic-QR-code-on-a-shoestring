@@ -1,0 +1,18 @@
+---
+title: "Dynamic QR Code System"
+---
+
+## Welcome
+
+This is a self-hosted dynamic QR code redirect system powered by Quarto and GitHub Pages.
+
+## How It Works
+
+1. **Static QR Codes**: Generate QR codes once that point to `/{slug}` paths
+2. **Markdown Database**: Edit redirect targets in `_redirects/` folder
+3. **Auto-Deploy**: Push changes to trigger automatic site rebuild
+4. **Zero Cost**: Hosted entirely on GitHub Pages
+
+## Active Redirects
+
+Check the `_redirects/` folder for all configured redirects.
