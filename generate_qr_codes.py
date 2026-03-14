@@ -39,7 +39,6 @@ def generate_qr_codes(base_url, output_dir='qr_codes'):
     """
     redirects_dir = Path('_redirects')
     output_path = Path(output_dir)
-    output_path.mkdir(exist_ok=True)
     
     if not redirects_dir.exists():
         print(f"Error: {redirects_dir} directory not found!")
@@ -50,6 +49,35 @@ def generate_qr_codes(base_url, output_dir='qr_codes'):
     if not qr_files:
         print(f"No .qmd files found in {redirects_dir}")
         return
+    
+    # Check for existing QR codes and warn user
+    existing_codes = list(output_path.glob('*.png')) if output_path.exists() else []
+    
+    if existing_codes:
+        print("⚠️  WARNING: This will OVERWRITE existing QR codes!")
+        print(f"Found {len(existing_codes)} existing QR code(s):")
+        for existing_file in existing_codes:
+            print(f"  - {existing_file.name}")
+        print()
+        print("This is a DESTRUCTIVE action that may invalidate printed QR codes!")
+        print()
+        print("💡 Alternative: Use 'generate_new_qr_codes.py' to only generate missing codes")
+        print()
+        
+        # Ask for confirmation
+        while True:
+            response = input("Are you sure you want to continue? (type 'yes' to confirm): ").strip().lower()
+            if response == 'yes':
+                print("✅ Confirmed - proceeding with QR code regeneration...")
+                break
+            elif response in ['no', 'n', 'cancel', 'exit']:
+                print("❌ Cancelled - QR codes not regenerated.")
+                return
+            else:
+                print("Please type 'yes' to continue or 'no' to cancel.")
+        print()
+    
+    output_path.mkdir(exist_ok=True)
     
     print(f"Generating QR codes for {len(qr_files)} redirects...")
     print(f"Base URL: {base_url}")
@@ -81,15 +109,25 @@ def generate_qr_codes(base_url, output_dir='qr_codes'):
         output_file = output_path / f"{slug}.png"
         img.save(output_file)
         
-        print(f"✓ Generated: {output_file}")
+        if output_file in existing_codes:
+            print(f"🔄 OVERWRITTEN: {output_file}")
+        else:
+            print(f"✨ Generated: {output_file}")
         print(f"  QR URL: {qr_url}")
         print(f"  Current target: {target_url}")
         print()
     
     print("-" * 50)
     print(f"✓ All QR codes saved to {output_dir}/")
-    print("\nIMPORTANT: These QR codes are static and never need to be regenerated.")
-    print("Update redirect targets by editing the .qmd files in _redirects/")
+    print(f"✓ Total QR codes: {len(qr_files)}")
+    
+    if existing_codes:
+        print(f"⚠️  {len(existing_codes)} existing QR codes were overwritten!")
+        print()
+        print("🚨 IMPORTANT: If you have printed these QR codes, they will no longer work!")
+        print("   Consider using 'generate_new_qr_codes.py' for safer incremental updates.")
+    
+    print("\n💡 QR codes are static - update targets by editing .qmd files, not regenerating codes.")
 
 
 if __name__ == '__main__':
