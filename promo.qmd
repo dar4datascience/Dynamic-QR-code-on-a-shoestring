@@ -1,0 +1,74 @@
+---
+title: "Special Promotion"
+pagetitle: "Redirecting..."
+---
+
+```{=html}
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh; text-align: center; padding: 2rem;">
+  <h1 style="margin-bottom: 2rem;">🎉 Special Offer</h1>
+  
+  <p style="font-size: 1.2rem; margin-bottom: 2rem;">Click the button below to view our current promotion.</p>
+  
+  <a href="https://example.com/special-offer" 
+     id="redirectButton"
+     style="
+       display: inline-block;
+       padding: 1rem 3rem;
+       font-size: 1.3rem;
+       font-weight: bold;
+       color: white;
+       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+       border: none;
+       border-radius: 50px;
+       text-decoration: none;
+       cursor: pointer;
+       box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+       transition: transform 0.2s, box-shadow 0.2s;
+     "
+     onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)';"
+     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';">
+    View Offer →
+  </a>
+  
+  <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">
+    Redirecting automatically in <span id="countdown">3</span> seconds...
+  </p>
+</div>
+
+<script type="text/javascript">
+  // Get the redirect URL from the button
+  const redirectUrl = document.getElementById('redirectButton').href;
+  
+  // Countdown timer
+  let seconds = 3;
+  const countdownElement = document.getElementById('countdown');
+  
+  const timer = setInterval(() => {
+    seconds--;
+    if (countdownElement) {
+      countdownElement.textContent = seconds;
+    }
+    
+    if (seconds <= 0) {
+      clearInterval(timer);
+      window.location.href = redirectUrl;
+    }
+  }, 1000);
+  
+  // Allow immediate redirect on button click
+  document.getElementById('redirectButton').addEventListener('click', (e) => {
+    clearInterval(timer);
+  });
+</script>
+```
+
+::: {.callout-note}
+## Update This Redirect
+
+To change where this page redirects:
+
+1. Edit this file: `promo.qmd`
+2. Find the line: `<a href="https://example.com/special-offer"`
+3. Replace the URL with your new destination
+4. Commit and push to GitHub
+:::

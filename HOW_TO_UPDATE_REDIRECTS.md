@@ -2,71 +2,51 @@
 
 ## The Simple Truth
 
-Each `.qmd` file in `_redirects/` is a redirect page. To change where it redirects, just **edit the URL in two places**.
+Each `.qmd` file at the project root is a redirect page with a button. To change where it redirects, just **edit the URL in ONE place**.
 
 ## Example: Update Menu Redirect
 
-### Current File (`_redirects/menu.qmd`):
+### Current File (`menu.qmd`):
 
-```yaml
----
-title: "Redirecting to Menu..."
-pagetitle: "Redirecting..."
----
-
-```{=html}
-<meta http-equiv="refresh" content="0; url=https://example.com/restaurant-menu" />
-<script type="text/javascript">
-  window.location.href = "https://example.com/restaurant-menu";
-</script>
-
-<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh; text-align: center;">
-  <h1>Redirecting to Menu...</h1>
-  <div class="spinner"></div>
-  <p>If you are not redirected automatically, <a href="https://example.com/restaurant-menu">click here</a>.</p>
-</div>
-<!-- ... spinner CSS ... -->
+```html
+<a href="https://example.com/restaurant-menu" 
+   id="redirectButton"
+   style="...">
+  View Menu →
+</a>
 ```
 
 ### To Change Redirect Destination:
 
-**Find and replace the URL in 3 places:**
+**Find and replace the URL in ONE place:**
 
-1. Line 7: `<meta http-equiv="refresh" content="0; url=YOUR-NEW-URL" />`
-2. Line 9: `window.location.href = "YOUR-NEW-URL";`
-3. Line 15: `<a href="YOUR-NEW-URL">click here</a>`
+Look for the line with `<a href="..."` and change the URL:
+
+```html
+<a href="https://YOUR-NEW-URL" 
+```
 
 ### Example - Change to New Menu:
 
-```yaml
----
-title: "Redirecting to Menu..."
-pagetitle: "Redirecting..."
----
+**Before:**
+```html
+<a href="https://example.com/restaurant-menu" 
+```
 
-```{=html}
-<meta http-equiv="refresh" content="0; url=https://myrestaurant.com/new-menu-2024" />
-<script type="text/javascript">
-  window.location.href = "https://myrestaurant.com/new-menu-2024";
-</script>
-
-<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh; text-align: center;">
-  <h1>Redirecting to Menu...</h1>
-  <div class="spinner"></div>
-  <p>If you are not redirected automatically, <a href="https://myrestaurant.com/new-menu-2024">click here</a>.</p>
-</div>
-<!-- ... spinner CSS ... -->
+**After:**
+```html
+<a href="https://myrestaurant.com/new-menu-2024" 
 ```
 
 ## Quick Steps
 
-1. **Open** the `.qmd` file you want to update
-2. **Find** the old URL (appears 3 times)
-3. **Replace** all 3 instances with your new URL
+1. **Open** the `.qmd` file you want to update (e.g., `menu.qmd`)
+2. **Find** the button link: `<a href="https://example.com/..."`
+3. **Replace** with your new URL
 4. **Save** the file
 5. **Commit and push**:
    ```bash
-   git add _redirects/menu.qmd
+   git add menu.qmd
    git commit -m "Update menu to new URL"
    git push
    ```
@@ -79,20 +59,24 @@ Your QR code will now redirect to the new URL. No QR code regeneration needed!
 ## File Structure
 
 ```
-_redirects/
+Project Root/
 ├── menu.qmd      → Redirects to your menu URL
 ├── contact.qmd   → Redirects to your contact URL
 └── promo.qmd     → Redirects to your promo URL
 ```
 
 When Quarto builds the site:
-- `menu.qmd` becomes `_site/menu/index.html`
+- `menu.qmd` becomes `_site/menu.html`
 - QR code points to: `https://yourname.github.io/repo/menu`
-- That page redirects to whatever URL you put in the file
+- User sees a button and auto-redirects in 3 seconds
 
-## Pro Tip
+## How It Works
 
-Use find-and-replace in your editor to change all 3 URLs at once:
-- Find: `https://example.com/restaurant-menu`
-- Replace: `https://myrestaurant.com/new-menu`
-- Replace All (3 occurrences)
+1. **User scans QR code** → Opens `yoursite.github.io/menu`
+2. **Page loads** with a big button
+3. **Countdown starts** (3 seconds)
+4. **User can click button** to redirect immediately
+5. **Or wait** for automatic redirect
+6. **Arrives** at your target URL
+
+The button URL is the **only thing you need to change** to update the redirect!
