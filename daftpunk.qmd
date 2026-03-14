@@ -1,0 +1,158 @@
+---
+title: "Daft Punk Tribute"
+pagetitle: "Daft Punk Tribute"
+---
+
+```{=html}
+<div style="
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  min-height: 70vh; 
+  text-align: center; 
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+">
+  
+  <div style="
+    display: inline-block;
+    padding: 1.5rem 3rem;
+    background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%);
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px rgba(255, 107, 107, 0.3);
+    transform: perspective(1000px) rotateX(5deg);
+  ">
+    <h1 style="
+      margin: 0; 
+      font-size: 2.5rem; 
+      font-weight: bold; 
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    ">DAFT PUNK</h1>
+  </div>
+  
+  <div style="
+    width: 80px;
+    height: 80px;
+    border: 4px solid;
+    border-image: linear-gradient(45deg, #ff6b6b, #4ecdc4) 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    animation: pulse 2s infinite, rotate 4s linear infinite;
+  ">
+    <div style="
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      border-radius: 50%;
+    "></div>
+  </div>
+  
+  <p style="
+    font-size: 1.3rem; 
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  ">Around the World</p>
+  
+  <a href="https://www.youtube.com/watch?v=FGBhQbmPwH8&list=RDFGBhQbmPwH8&start_radio=1" 
+     id="redirectButton"
+     style="
+       display: inline-block;
+       padding: 1.2rem 3rem;
+       font-size: 1.1rem;
+       font-weight: bold;
+       color: white;
+       background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%);
+       border: none;
+       border-radius: 50px;
+       text-decoration: none;
+       cursor: pointer;
+       box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+       transition: all 0.3s ease;
+       text-transform: uppercase;
+       letter-spacing: 1px;
+       position: relative;
+       overflow: hidden;
+     "
+     onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 8px 25px rgba(255, 107, 107, 0.6)';"
+     onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 6px 20px rgba(255, 107, 107, 0.4)';">
+    
+    <span style="position: relative; z-index: 1;">🎵 Listen Now →</span>
+  </a>
+  
+  <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">
+    Press the button below to experience the music
+  </p>
+  
+  <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.6;">
+    Ready to get lucky? Click the button to continue! 🎵
+  </p>
+  
+  <div style="
+    margin-top: 3rem;
+    font-size: 0.7rem;
+    opacity: 0.5;
+    font-style: italic;
+  ">
+    "One More Time... Harder, Better, Faster, Stronger"
+  </div>
+</div>
+
+<style>
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#redirectButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+#redirectButton:hover::before {
+  left: 100%;
+}
+</style>
+
+<script type="text/javascript">
+  // Button click will handle the redirect automatically via the href attribute
+  // No automatic redirect - user must click the button
+</script>
+```
+
+::: {.callout-note}
+## Update This Redirect
+
+To change where this page redirects:
+
+1. Edit this file: `daftpunk.qmd`
+2. Find the line: `<a href="https://www.youtube.com/watch?v=FGBhQbmPwH8..."`
+3. Replace the URL with your new destination
+4. Commit and push to GitHub
+:::
